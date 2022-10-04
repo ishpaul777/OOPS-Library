@@ -1,5 +1,8 @@
-class Person
+require_relative 'nameable.rb'
+
+class Person < Nameable
   def initialize(age, name = 'unknown', parent_permission: true)
+    super()
     @id = Random.rand(1..1000)
     @name = name
     @age = age
@@ -8,6 +11,10 @@ class Person
 
   def can_use_services?
     of_age? || @parent_permission
+  end
+
+  def correct_name
+    @name
   end
 
   # getters and setters
@@ -21,7 +28,3 @@ class Person
     @age >= 18
   end
 end
-
-# person1 = Person.new(19, "Ishpaul", false)
-
-# puts person1.can_use_services?
