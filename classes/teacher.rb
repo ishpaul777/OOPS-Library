@@ -10,7 +10,7 @@ class Teacher < Person
   def can_use_services?
     true
   end
-  
+
   # getters and setters
   attr_accessor :specialization
 end
