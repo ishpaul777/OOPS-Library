@@ -1,4 +1,4 @@
-require './person'
+require_relative './person'
 
 class Teacher < Person
   def initialize(specialization, age, name = 'Unknown', parent_permission: true)
@@ -11,5 +11,6 @@ class Teacher < Person
     true
   end
 
+  # getters and setters
   attr_accessor :specialization
 end
