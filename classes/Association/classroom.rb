@@ -1,9 +1,3 @@
-=begin
-Create a class Classroom with the following:
-@label instance variable, should be initialized in the constructor.
-Setter and getter for @label (remember about attr_accessor).
-=end
-
 class Classroom
   def initialize(label)
     @label = label
