@@ -35,7 +35,7 @@ class RentalRecords
 
     person = members.select { |member| member.id == id }
 
-    if person.length.empty?
+    if person[0].length.empty?
       puts "OOPS Library# No me,ber found by Id -> #{id}"
     else
       puts 'OOPS Library# All Rental by the person-'
