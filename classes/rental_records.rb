@@ -35,8 +35,8 @@ class RentalRecords
 
     person = members.select { |member| member.id == id }
 
-    if person[0].length.empty?
-      puts "OOPS Library# No me,ber found by Id -> #{id}"
+    if person.empty?
+      puts "OOPS Library# No member found by Id -> #{id}"
     else
       puts 'OOPS Library# All Rental by the person-'
       person[0].rentals.each do |r|
