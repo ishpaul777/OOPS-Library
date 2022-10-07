@@ -4,15 +4,17 @@ class Student < Person
   def initialize(classroom, age, name = 'unknown', parent_permission: true)
     super(age, name, parent_permission: parent_permission)
     @classroom = classroom
-    add_classroom(classroom)
+    # puts @classroom
+    puts classroom.label
+    add_classroom()
   end
 
   def play_hooky
     "¯\(ツ)/¯"
   end
 
-  def add_classroom(classroom)
-    classroom.add_student(self)
+  def add_classroom
+    @classroom.add_student(self)
   end
 
   attr_accessor :classroom
