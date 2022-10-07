@@ -15,13 +15,13 @@ class App
   def process(input)
     case input
     when 1
-      @books.list_all_books()
+      @books.list_all_books
     when 2
-      @members.list_all_members()
+      @members.list_all_members
     when 3
       @members.create_member(@classrooms)
     when 4
-      @books.create_a_book()
+      @books.create_a_book
     end
   end
 end
