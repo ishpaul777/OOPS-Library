@@ -1,4 +1,4 @@
-require_relative './book.rb'
+require_relative './book'
 
 class Books
   attr_reader :list
@@ -8,9 +8,7 @@ class Books
   end
 
   def list_all_books
-    @list.each { |book|
-      puts "Title: #{book.title}, Author: #{book.author}"
-    }
+    @list.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
   end
 
   def create_a_book

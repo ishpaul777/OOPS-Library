@@ -14,15 +14,15 @@ end
 
 def main(app = App.new)
   input = main_menu
-  if input > 0 && input <= 6
+  if input.positive? && input <= 6
     app.process(input)
     main(app)
   elsif input == 7
     return
   else
-    puts "Please enter a valid input"
+    puts 'Please enter a valid input'
     main(app)
   end
 end
 
-main()
+main

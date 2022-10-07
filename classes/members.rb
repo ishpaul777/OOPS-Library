@@ -49,15 +49,13 @@ class Members
         print 'Label: '
         label = gets.chomp
         classrooms.create_classroom(label)
-        puts classrooms.list.length
         return classrooms.list[classrooms.list.length - 1]
       when 2
         classrooms.list.each_with_index { |c, i| puts "#{i + 1} -> Label: #{c.label}" }
         print "Choose a classroom from the following: [Input the number]"
         index = gets.to_i - 1
         if (index >= 0 && index < classrooms.list.length)
-          classroom = classrooms.list[index]
-          return classroom
+          return classrooms.list[index]
         else
           puts 'Please enter a valid value '
           choose_classroom(classrooms)
@@ -70,24 +68,16 @@ class Members
   end
 
   def create_member(classrooms)
-    type = choose_member_type
     print 'Age: '
     age = gets.chomp
     print 'Name: '
     name = gets.chomp
-
-    case type
+    case choose_member_type
     when 1
-      parent_permission = parent_permission?
       classroom = choose_classroom(classrooms)
-      puts classroom
-      if parent_permission
-        @list << Student.new(classroom, age, name)
-      else
-        @list << Student.new(classroom, age, name, parent_permission: false)
-      end
+      parent_permission? ? @list << Student.new(classroom, age, name)
+      : @list << Student.new(classroom, age, name, parent_permission: false);
       puts 'Student created successfully'
-
     when 2
       print 'Specialization: '
       specialization = gets.chomp

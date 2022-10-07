@@ -4,9 +4,7 @@ class Student < Person
   def initialize(classroom, age, name = 'unknown', parent_permission: true)
     super(age, name, parent_permission: parent_permission)
     @classroom = classroom
-    # puts @classroom
-    puts classroom.label
-    add_classroom()
+    add_classroom
   end
 
   def play_hooky
