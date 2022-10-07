@@ -1,0 +1,26 @@
+require_relative './book'
+
+class Books
+  attr_reader :list
+
+  def initialize
+    @list = []
+  end
+
+  def list_all_books
+    puts 'OOPS Library# List of Books ->'
+    @list.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
+  end
+
+  def create_a_book
+    print 'OOPS Library# Title: '
+    title = gets.chomp
+
+    print 'OOPS Library# Author: '
+    author = gets.chomp
+
+    @list << Book.new(title, author)
+
+    puts 'OOPS Library# Book created successfully!'
+  end
+end

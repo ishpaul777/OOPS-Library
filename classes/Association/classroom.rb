@@ -6,7 +6,6 @@ class Classroom
 
   def add_student(student)
     @students.push(student)
-    student.classroom = self
   end
 
   attr_accessor :label
