@@ -18,7 +18,7 @@ def main(app = App.new)
     app.process(input)
     main(app)
   elsif input == 7
-    return
+    puts 'Quitted program'
   else
     puts 'Please enter a valid input'
     main(app)

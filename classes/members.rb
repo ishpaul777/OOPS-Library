@@ -76,7 +76,7 @@ class Members
       @list << if parent_permission?
                  Student.new(classroom, age, name)
                else
-                 Student.new(classroom, age, name, parent_permission: false);
+                 Student.new(classroom, age, name, parent_permission: false)
                end
       puts 'Student created successfully'
     when 2
