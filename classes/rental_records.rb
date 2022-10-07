@@ -1,6 +1,6 @@
 require_relative './Association/rentals'
 
-class Rental_records
+class RentalRecords
   attr_reader :list
 
   def initialize
@@ -14,9 +14,9 @@ class Rental_records
     book = books[index - 1]
 
     puts 'OOPS Library# Select a person from the following list by index'
-    members.each_with_index { |member, i|
+    members.each_with_index do |member, i|
       puts "#{i + 1} -> [#{member.class}] Name: #{member.name}, ID: #{member.id}, Age: #{member.age}"
-    }
+    end
     index = gets.to_i
     person = members[index - 1]
 
@@ -35,7 +35,7 @@ class Rental_records
 
     person = members.select { |member| member.id == id }
 
-    if (person.length == 0)
+    if (person.length.empty?)
       puts "OOPS Library# No me,ber found by Id -> #{id}"
     else
       puts 'OOPS Library# All Rental by the person-'

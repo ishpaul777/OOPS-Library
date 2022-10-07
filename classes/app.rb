@@ -7,7 +7,7 @@ require_relative './rental_records'
 
 class App
   def initialize(members = Members.new, books = Books.new, classrooms = Classrooms.new,
-                 rental_records = Rental_records.new)
+                 rental_records = RentalRecords.new)
     @members = members
     @books = books
     @classrooms = classrooms
@@ -17,13 +17,13 @@ class App
   def process(input)
     case input
     when 1
-      if (@books.list.length == 0)
+      if @books.list.empty?
         puts 'OOPS Library# Sorry no books in library. Create a book!'
       else
         @books.list_all_books
       end
     when 2
-      if (@members.list.length == 0)
+      if @members.list.empty?
         puts 'OOPS Library# Sorry no members. Create a member!'
       else
         @members.list_all_members
@@ -33,9 +33,9 @@ class App
     when 4
       @books.create_a_book
     when 5
-      if (@books.list.length == 0)
+      if @books.list.empty?
         puts 'OOPS Library# Sorry no books in library. Create a book!'
-      elsif (@members.list.length == 0)
+      elsif @members.list.empty?
         puts 'OOPS Library# Sorry no members. Create a member!'
       else
         @rental_records.create_rental(@books.list, @members.list)

@@ -8,7 +8,7 @@ class Books
   end
 
   def list_all_books
-    puts "OOPS Library# List of Books ->"
+    puts 'OOPS Library# List of Books ->'
     @list.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
   end
 

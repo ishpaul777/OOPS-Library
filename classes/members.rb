@@ -10,7 +10,7 @@ class Members
   end
 
   def list_all_members
-    puts "OOPS Library# List of Members ->"
+    puts 'OOPS Library# List of Members ->'
     @list.each { |member| puts " [#{member.class}] ID: #{member.id}, Name: #{member.name}, Age: #{member.age}" }
   end
 

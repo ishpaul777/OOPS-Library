@@ -9,7 +9,7 @@ def main_menu
 5 -> Create a rental
 6 -> List all rentals for person id
 7 -> quit app"
-  print "OOPS Library# "
+  print 'OOPS Library# '
   gets.to_i
 end
 
