@@ -5,13 +5,55 @@ require_relative './Association/classrooms'
 class Members
   attr_accessor :list
 
-  def initialize
+  def initialize(classrooms)
     @list = []
+    get_members(classrooms)
+  end
+
+  def get_members(classrooms)
+    students = JSON.parse(File.read('Data/students.json'))
+
+    students.each do |student|
+      # puts student['name']
+      class_of_stdnt = []
+      classrooms.list.each do |classroom|
+        if (student["classroom"] == classroom.label)
+          class_of_stdnt << classroom
+        end
+      end
+
+      if class_of_stdnt.empty?
+        classrooms.create_classroom(student["classroom"])
+        class_of_stdnt[0] = classrooms.list[classrooms.list.length - 1]
+      end
+
+      permission = student['parent_permission']
+      if permission
+        newstudent = Student.new(class_of_stdnt[0], student['age'], student['name'], student['id'])
+      else
+        newstudent = Student.new(class_of_stdnt[0], student['age'], student['name'], student['id'],
+                                 parent_permission: false)
+      end
+      @list << newstudent
+    end
+
+    teachers = JSON.parse(File.read('Data/teachers.json'))
+    teachers.each do |teacher|
+      newTeacher = Teacher.new(teacher['specialization'], teacher['age'], teacher['name'], teacher['id'])
+      @list << newTeacher
+    end
   end
 
   def list_all_members
     puts 'OOPS Library# List of Members ->'
-    @list.each { |member| puts " [#{member.class}] ID: #{member.id}, Name: #{member.name}, Age: #{member.age}" }
+    @list.each do |member|
+      print " [#{member.class}] ID: #{member.id}, Name: #{member.name}, Age: #{member.age}, "
+      if member.class == Student
+        print "Class: #{member.classroom.label}\n"
+      else
+        print "specialization: #{member.specialization}\n"
+      end
+    end
   end
 
   def parent_permission?
@@ -66,7 +108,7 @@ class Members
     end
   end
 
-  def create_member(classrooms)
+  def create_member(classrooms, data)
     print 'OOPS Library# Age: '
     age = gets.chomp
     print 'OOPS Library# Name: '
@@ -74,16 +116,20 @@ class Members
     case choose_member_type
     when 1
       classroom = choose_classroom(classrooms)
-      @list << if parent_permission?
-                 Student.new(classroom, age, name)
-               else
-                 Student.new(classroom, age, name, parent_permission: false)
-               end
+      if parent_permission?
+        newstudent = Student.new(classroom, age, name)
+      else
+        newstudent = Student.new(classroom, age, name, parent_permission: false)
+      end
+      @list << newstudent
+      data.add_student(newstudent)
       puts 'OOPS Library# Student created successfully'
     when 2
       print 'OOPS Library# Specialization: '
       specialization = gets.chomp
-      @list << Teacher.new(specialization, age, name)
+      newTeacher = Teacher.new(specialization, age, name)
+      @list << newTeacher
+      data.add_teacher(newTeacher)
       puts 'OOPS Library# Teacher created successfully'
     end
   end
