@@ -6,11 +6,11 @@ class Data
     @rental_records = JSON.parse(File.read('data/rental_records.json'))
   end
 
-  def addBook(book)
+  def add_book(book)
     # creat obj to push
     obj = {
-      "title": book.title,
-      "author": book.author
+      title: book.title,
+      author: book.author
     }
     # push it to the book json obj
     @books << obj
@@ -20,11 +20,11 @@ class Data
 
   def add_student(student)
     obj = {
-      "classroom": student.classroom.label,
-      "id": student.id,
-      "name": student.name,
-      "age": student.age,
-      "parent_permission": student.parent_permission
+      classroom: student.classroom.label,
+      id: student.id,
+      name: student.name,
+      age: student.age,
+      parent_permission: student.parent_permission
     }
     @students << obj
     # override
@@ -33,10 +33,10 @@ class Data
 
   def add_teacher(teacher)
     obj = {
-      "id": teacher.id,
-      "name": teacher.name,
-      "age": teacher.age,
-      "specialization": teacher.specialization
+      id: teacher.id,
+      name: teacher.name,
+      age: teacher.age,
+      specialization: teacher.specialization
     }
 
     @teachers << obj
@@ -46,7 +46,7 @@ class Data
 
   def add_rental(rental)
     obj = {
-      "date": rental.date, "member_name": rental.person.name, "member_id": rental.person.id, "book": rental.book.title
+      date: rental.date, member_name: rental.person.name, member_id: rental.person.id, book: rental.book.title
     }
     @rental_records << obj
     File.write('data/rental_records.json', JSON.generate(@rental_records))

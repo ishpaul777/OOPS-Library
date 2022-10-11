@@ -17,30 +17,28 @@ class Members
       # puts student['name']
       class_of_stdnt = []
       classrooms.list.each do |classroom|
-        if (student["classroom"] == classroom.label)
-          class_of_stdnt << classroom
-        end
+        class_of_stdnt << classroom if student['classroom'] == classroom.label
       end
 
       if class_of_stdnt.empty?
-        classrooms.create_classroom(student["classroom"])
+        classrooms.create_classroom(student['classroom'])
         class_of_stdnt[0] = classrooms.list[classrooms.list.length - 1]
       end
 
       permission = student['parent_permission']
-      if permission
-        newstudent = Student.new(class_of_stdnt[0], student['age'], student['name'], student['id'])
-      else
-        newstudent = Student.new(class_of_stdnt[0], student['age'], student['name'], student['id'],
+      newstudent = if permission
+                     Student.new(class_of_stdnt[0], student['age'], student['name'], student['id'])
+                   else
+                     Student.new(class_of_stdnt[0], student['age'], student['name'], student['id'],
                                  parent_permission: false)
-      end
+                   end
       @list << newstudent
     end
 
     teachers = JSON.parse(File.read('Data/teachers.json'))
     teachers.each do |teacher|
-      newTeacher = Teacher.new(teacher['specialization'], teacher['age'], teacher['name'], teacher['id'])
-      @list << newTeacher
+      new_teacher = Teacher.new(teacher['specialization'], teacher['age'], teacher['name'], teacher['id'])
+      @list << new_teacher
     end
   end
 
@@ -48,7 +46,7 @@ class Members
     puts 'OOPS Library# List of Members ->'
     @list.each do |member|
       print " [#{member.class}] ID: #{member.id}, Name: #{member.name}, Age: #{member.age}, "
-      if member.class == Student
+      if member.instance_of?(Student)
         print "Class: #{member.classroom.label}\n"
       else
         print "specialization: #{member.specialization}\n"
@@ -116,20 +114,20 @@ class Members
     case choose_member_type
     when 1
       classroom = choose_classroom(classrooms)
-      if parent_permission?
-        newstudent = Student.new(classroom, age, name)
-      else
-        newstudent = Student.new(classroom, age, name, parent_permission: false)
-      end
+      newstudent = if parent_permission?
+                     Student.new(classroom, age, name)
+                   else
+                     Student.new(classroom, age, name, parent_permission: false)
+                   end
       @list << newstudent
       data.add_student(newstudent)
       puts 'OOPS Library# Student created successfully'
     when 2
       print 'OOPS Library# Specialization: '
       specialization = gets.chomp
-      newTeacher = Teacher.new(specialization, age, name)
-      @list << newTeacher
-      data.add_teacher(newTeacher)
+      new_teacher = Teacher.new(specialization, age, name)
+      @list << new_teacher
+      data.add_teacher(new_teacher)
       puts 'OOPS Library# Teacher created successfully'
     end
   end

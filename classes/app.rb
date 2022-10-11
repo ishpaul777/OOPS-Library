@@ -4,7 +4,7 @@ require_relative './decorator/trim'
 require_relative './books'
 require_relative './members'
 require_relative './rental_records'
-require_relative '../Data/Data.rb'
+require_relative '../Data/data'
 
 class App
   def initialize(books = Books.new, classrooms = Classrooms.new,

@@ -6,18 +6,18 @@ class Books
 
   def initialize
     @list = []
-    get_books
+    fetch_books
   end
 
-  def get_books
+  def fetch_books
     # add code here
     books = JSON.parse(File.read('Data/books.json'))
     # for every book create a new book from author an title
     books.map do |book|
-      newBook = Book.new(book['title'], book['author'])
+      new_book = Book.new(book['title'], book['author'])
       # newBook.rentals = book['rentals']
-      @list << newBook
-    end 
+      @list << new_book
+    end
   end
 
   def list_all_books
@@ -32,9 +32,9 @@ class Books
     print 'OOPS Library# Author: '
     author = gets.chomp
 
-    newBook = Book.new(title, author)
-    @list << newBook
-    data.addBook(newBook)
+    new_book = Book.new(title, author)
+    @list << new_book
+    data.add_book(new_book)
 
     puts 'OOPS Library# Book created successfully!'
   end
