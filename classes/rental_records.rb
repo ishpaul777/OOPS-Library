@@ -9,7 +9,13 @@ class RentalRecords
   end
 
   def get_records(books, members)
-    # add code here
+    records = JSON.parse(File.read('Data/rental_records.json'))
+    records.map do |record|
+      person = members.list.select { |member| member.id == record['member_id'] }
+      book = books.list.select { |book| book.title == record['book'] }
+      date = record["date"]
+      @list << Rental.new(date, person[0], book[0])
+    end
   end
 
   def create_rental(books, members, data)
