@@ -28,6 +28,17 @@
 - Twitter - [@ishpaul777](https://twitter.com/ishpaul777)
 - Linkedin - [Ishpaul Singh](https://www.linkedin.com/in/ishpaul777/)
 
+ 👤 **Tarek Yosry**
+- GitHub: [@Tarek102](https://github.com/Tarek102)
+- LinkedIn: [Tarek Yosry](https://www.linkedin.com/in/tarek-yosry/)
+
+👤 **Onomeh Onwuanibe**
+
+- GitHub: [@githubhandle](https://github.com/Estherstarr/)
+- Twitter: [@twitterhandle](https://twitter.com/AnibeEsther)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/onwuanibeonome)
+
+
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
