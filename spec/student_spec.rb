@@ -1,5 +1,5 @@
-require_relative '..\classes\student'
-require_relative '..\classes\Association\classroom'
+require_relative '../classes/student'
+require_relative '../classes/Association/classroom'
 describe Student do
   context 'When testing the Person class' do
     classroom = Classroom.new('9-A')

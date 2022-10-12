@@ -1,6 +1,6 @@
-require_relative '..\classes\person'
-require_relative '..\classes\decorator\trim'
-require_relative '..\classes\decorator\capitalize'
+require_relative '../classes/person'
+require_relative '../classes/decorator/trim'
+require_relative '../classes/decorator/capitalize'
 
 describe Person do
   context 'When testing the Person class' do

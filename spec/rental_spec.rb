@@ -1,7 +1,7 @@
-require_relative '..\classes\student'
-require_relative '..\classes\Association\classroom'
-require_relative '..\classes\Association\rentals'
-require_relative '..\classes\book'
+require_relative '../classes/student'
+require_relative '../classes/Association/classroom'
+require_relative '../classes/Association/rentals'
+require_relative '../classes/book'
 describe Student do
   context 'When testing the Rental class' do
     classroom = Classroom.new('9-A')

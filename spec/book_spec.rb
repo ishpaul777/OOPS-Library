@@ -1,4 +1,4 @@
-require_relative '..\classes\book'
+require_relative '../classes/book'
 
 describe Book do
   context 'When testing the Book class' do

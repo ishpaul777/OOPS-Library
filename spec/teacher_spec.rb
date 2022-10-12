@@ -1,4 +1,4 @@
-require_relative '..\classes\teacher'
+require_relative '../classes/teacher'
 describe Teacher do
   context 'When testing the Teacher class' do
     teacher = Teacher.new('Maths', 41, 'john', 1)
