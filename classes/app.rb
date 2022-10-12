@@ -4,14 +4,16 @@ require_relative './decorator/trim'
 require_relative './books'
 require_relative './members'
 require_relative './rental_records'
+require_relative '../Data/data'
 
 class App
-  def initialize(members = Members.new, books = Books.new, classrooms = Classrooms.new,
-                 rental_records = RentalRecords.new)
+  def initialize(books = Books.new, classrooms = Classrooms.new,
+                 members = Members.new(classrooms), rental_records = RentalRecords.new(books, members), data = Data.new)
     @members = members
     @books = books
     @classrooms = classrooms
     @rental_records = rental_records
+    @data = data
   end
 
   def process(input)
@@ -29,16 +31,16 @@ class App
         @members.list_all_members
       end
     when 3
-      @members.create_member(@classrooms)
+      @members.create_member(@classrooms, @data)
     when 4
-      @books.create_a_book
+      @books.create_a_book(@data)
     when 5
       if @books.list.empty?
         puts 'OOPS Library# Sorry no books in library. Create a book!'
       elsif @members.list.empty?
         puts 'OOPS Library# Sorry no members. Create a member!'
       else
-        @rental_records.create_rental(@books.list, @members.list)
+        @rental_records.create_rental(@books.list, @members.list, @data)
       end
     when 6
       @rental_records.list_all_rentals_for_person_id(@members.list)

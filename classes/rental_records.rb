@@ -3,11 +3,22 @@ require_relative './Association/rentals'
 class RentalRecords
   attr_reader :list
 
-  def initialize
+  def initialize(books, members)
     @list = []
+    get_records(books, members)
   end
 
-  def create_rental(books, members)
+  def get_records(books, members)
+    records = JSON.parse(File.read('Data/rental_records.json'))
+    records.map do |record|
+      person = members.list.select { |member| member.id == record['member_id'] }
+      book = books.list.select { |b| b.title == record['book'] }
+      date = record['date']
+      @list << Rental.new(date, person[0], book[0])
+    end
+  end
+
+  def create_rental(books, members, data)
     puts 'OOPS Library# Select a book from the following list by index'
     books.each_with_index { |book, i| puts "#{i + 1}-> Title: #{book.title}, Author: #{book.author}" }
     index = gets.to_i
@@ -25,7 +36,7 @@ class RentalRecords
 
     rental = Rental.new(date, person, book)
     @list << rental
-
+    data.add_rental(rental)
     puts 'OOPS Library# Rental created successfully'
   end
 
@@ -40,7 +51,7 @@ class RentalRecords
     else
       puts 'OOPS Library# All Rental by the person-'
       person[0].rentals.each do |r|
-        puts "Date: #{r.date}, Book -> #{r.book.title} by #{r.book.author}"
+        puts "Date: #{r.date}, Book -> #{r.book.title} "
       end
     end
   end
